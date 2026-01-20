@@ -1,0 +1,52 @@
+deployment:
+  replicas: 1
+
+service:
+  type: LoadBalancer
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+  name: traefik
+
+ports:
+  web:
+    port: 80
+    expose:
+      default: true
+
+  websecure:
+    port: 443
+    expose:
+      default: true
+
+  metrics:
+    port: 9102
+    expose:
+      default: true
+    exposedPort: 9102
+    protocol: TCP
+
+api:
+  dashboard: true
+
+metrics:
+  prometheus:
+    entrypoint: metrics
+    addEntryPointsLabels: true
+    addServicesLabels: true
+    service:
+      enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+      additionalLabels: 
+        release: kp
+
+access:
+  enabled: true
+  format: "json"
+
+logs:
+  general:
+    format: "json"
