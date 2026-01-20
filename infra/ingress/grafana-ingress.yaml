@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - grafana.lab.local
+    secretName: grafana-tls
+  rules:
+  - host: grafana.lab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kp-grafana
+            port:
+              number: 80
+
