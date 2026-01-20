@@ -1,0 +1,32 @@
+auth:
+  username: appuser
+  password: apppassword
+  database: appdb
+  postgresPassword: supersecretpostgres
+
+primary:
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 20Gi
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+
+  podAntiAffinityPreset: soft
+
+architecture: standalone
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    labels:
+      release: kp
+
