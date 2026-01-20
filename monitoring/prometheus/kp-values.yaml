@@ -1,0 +1,44 @@
+grafana:
+  enabled: true
+  service:
+    type: ClusterIP
+  persistence:
+    enabled: true
+    type: pvc
+    size: 10Gi
+    storageClassName: longhorn
+    accessModes:
+      - ReadWriteOnce
+  initChownData:
+    enabled: false
+
+prometheus:
+  prometheusSpec:
+    retention: 30d
+    retentionSize: 8GB
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
+    resources:
+      requests:
+        cpu: 200m
+        memory: 800Mi
+      limits:
+        cpu: 1
+        memory: 2Gi
+
+alertmanager:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: true
+
+nodeExporter:
+  enabled: true
+
