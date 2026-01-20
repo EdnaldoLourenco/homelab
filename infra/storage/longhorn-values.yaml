@@ -1,0 +1,9 @@
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    additionalLabels:
+      release: kp
+    interval: 30s
+    scrapeTimeout: 10s
