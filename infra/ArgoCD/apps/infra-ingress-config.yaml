@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: infra-ingress-config
   namespace: argocd
+  argocd.argoproj.io/sync-wave: "3"
 spec:
   project: default
   source:

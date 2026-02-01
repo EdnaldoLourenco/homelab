@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: monitoring-loki
   namespace: argocd
+  argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   sources:
