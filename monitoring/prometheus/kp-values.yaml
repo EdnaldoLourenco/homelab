@@ -11,6 +11,8 @@ grafana:
       - ReadWriteOnce
   initChownData:
     enabled: false
+  adminUser: admin
+  adminPassword: admin@00pass
 
 prometheus:
   prometheusSpec:
