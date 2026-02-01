@@ -9,8 +9,11 @@ spec:
     repoURL: https://github.com/EdnaldoLourenco/homelab.git
     targetRevision: main
     path: infra/ingress
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true
