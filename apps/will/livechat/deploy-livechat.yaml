@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: livechat
+    will: livechat
+  name: livechat
+  namespace: apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: livechat
+  template:
+    metadata:
+      labels:
+        app: livechat
+    spec:
+      containers:
+      - image: williamledo/livechat:97849cf25aba29304c9e35c8ed583f1279695165
+        name: livechat

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: livechat
+  namespace: apps
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - live.lab.local
+    secretName: livechat-tls
+  rules:
+  - host: livechat.lab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: livechat
+            port:
+              number: 80
+
