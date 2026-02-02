@@ -3,6 +3,12 @@ kind: Application
 metadata:
   name: apps-livechat
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: app=williamledo/livechat
+    argocd-image-updater.argoproj.io/app.allow-tags: regexp:^[a-f0-9]{40}$
+    argocd-image-updater.argoproj.io/app.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/gitops-credentials
+    argocd-image-updater.argoproj.io/app.kustomize.image-name: williamledo/livechat
 spec:
   project: default
   source:

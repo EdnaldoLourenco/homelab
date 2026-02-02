@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deploy-livechat.yaml
+  - svc-livechat.yaml
+  - ingress-livechat.yaml
+
+images:
+  - name: williamledo/livechat
+    newTag: "97849cf25aba29304c9e35c8ed583f1279695165"

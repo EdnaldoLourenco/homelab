@@ -5,3 +5,16 @@ metrics:
     namespace: monitoring
     additionalLabels:
       release: kp
+
+config:
+  git.user: "EdnaldoLourenco"
+  git.email: "junior_ramos_@hotmail.com"
+  git.commit-message-template: "chore(image): update {{.AppName}} -> {{.Image}}:{{.NewTag}}"
+
+  log.level: "info"
+
+  registries:
+    - name: Docker Hub
+      api_url: https://registry-1.docker.io
+      prefix: docker.io
+      ping: yes
