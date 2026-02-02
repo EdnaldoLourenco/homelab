@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         app: livechat
+        will: livechat
     spec:
       containers:
       - image: williamledo/livechat:97849cf25aba29304c9e35c8ed583f1279695165
