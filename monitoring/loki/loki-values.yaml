@@ -35,7 +35,7 @@ minio:
 deploymentMode: SingleBinary
 
 singleBinary:
-  replicas: 3
+  replicas: 2
 
 persistence:
   enabled: true
