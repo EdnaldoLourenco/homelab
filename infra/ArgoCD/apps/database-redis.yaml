@@ -10,7 +10,7 @@ spec:
       chart: redis
       targetRevision: 25.2.0
       helm:
-        releaseName: postgres
+        releaseName: redis
         valueFiles: 
            - $values/database/redis/redis-values.yaml
 
