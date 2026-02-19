@@ -9,7 +9,7 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - live.lab.local
+    - livechat.lab.local
     secretName: livechat-tls
   rules:
   - host: livechat.lab.local

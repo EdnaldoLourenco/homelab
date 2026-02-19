@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amigospremia-api
+  namespace: apps
+  labels:
+    app.kubernetes.io/name: amigospremia-api
+    app.kubernetes.io/part-of: amigospremia
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: amigospremia-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: amigospremia-api
+        app.kubernetes.io/part-of: amigospremia
+    spec:
+      containers:
+        - name: amigospremia-api
+          image: williamledo/amigospremia-back:v7
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: FRONTEND_ORIGIN
+              value: "https://amigospremia.lab.local"
+            - name: TMPDIR
+              value: "/tmp"
+          envFrom:
+            - secretRef:
+                name: amigospremia-secrets
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

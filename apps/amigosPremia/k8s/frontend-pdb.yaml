@@ -1,0 +1,13 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: amigospremia-web
+  namespace: apps
+  labels:
+    app.kubernetes.io/name: amigospremia-web
+    app.kubernetes.io/part-of: amigospremia
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: amigospremia-web

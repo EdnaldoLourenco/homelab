@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - backend-deployment.yaml
+  - backend-hpa.yaml
+  - backend-pdb.yaml
+  - backend-secret.yaml
+  - backend-service.yaml
+  - frontend-deployment.yaml
+  - frontend-pdb.yaml
+  - frontend-service.yaml
+  - ingress.yaml
+

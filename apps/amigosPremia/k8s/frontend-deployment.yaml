@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amigospremia-web
+  namespace: apps
+  labels:
+    app.kubernetes.io/name: amigospremia-web
+    app.kubernetes.io/part-of: amigospremia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: amigospremia-web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: amigospremia-web
+        app.kubernetes.io/part-of: amigospremia
+    spec:
+      containers:
+        - name: amigospremia-web
+          image: ednaldoljr/amigospremia-frontend:v1.0
+          imagePullPolicy: IfNotPresent
+          # ports:
+          #   - name: http
+          #     containerPort: 8080
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
+          #   timeoutSeconds: 2
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 15
+          #   timeoutSeconds: 2
+          #   failureThreshold: 3
+          env:
+            - name: APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: amigospremia-secrets
+                  key: APP_NAME
+            - name: VITE_APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: amigospremia-secrets
+                  key: VITE_APP_NAME
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: nginx-cache
+          emptyDir: {}
