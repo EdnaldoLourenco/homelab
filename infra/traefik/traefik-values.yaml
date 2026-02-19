@@ -43,10 +43,10 @@ metrics:
       additionalLabels: 
         release: kp
 
-access:
-  enabled: true
-  format: "json"
-
 logs:
   general:
+    format: "json"
+  
+  access:
+    enabled: true
     format: "json"
