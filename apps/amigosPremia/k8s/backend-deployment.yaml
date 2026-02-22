@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: amigospremia-api
-          image: williamledo/amigospremia-back:v7
+          image: williamledo/amigospremia-back:v8
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -34,6 +34,22 @@ spec:
           envFrom:
             - secretRef:
                 name: amigospremia-secrets
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 3
           resources:
             requests:
               cpu: 100m
